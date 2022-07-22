@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        {% if user.user_color_id is None or user.user_color_id is 1 %}
+            #header {
+                color: black;
+                background-color: white;
+            }
+        {% else %}
+            #header {
+                color: white;
+                background-color: {{ user.user_color }};
+            }
+        {% endif %}
+    </style>
+    <link rel="stylesheet" href=" {% static 'css/base.css' %}">
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+
+</head>
+<body>
+
+<div id="header">
+    <span id="header" class="text">Зарабатывайте баллы за прохождение опросов, меняйте цвет фона у этой надписи в личном кабинете</span><br>
+    <ul id="navbar">
+        {% if user.is_authenticated %}
+            <li {% if section == "home" %}class="selected"{% endif %}>
+                <a href="{% url "home" %}">Главная</a>
+            </li>
+            <li> Вы вошли под именем {{ request.user.login }}
+            <li><a href="{% url 'list_questions' %}">Опросы</a></li>
+            <li>Баллы: {{ user.chain }}</li>
+            <li><a href="{% url 'logout' %}">Выйти</a></li>
+        {% else %}
+            <li><a href="{% url "login" %}">Войти</a></li>
+            <li><a href="{% url 'signup' %}">Регистрация</a></li>
+            <li><a href="{% url 'home' %}">Главная</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

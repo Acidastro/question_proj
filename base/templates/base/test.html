@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{# Показывать список цветов и цену на них #}
+{# При нажатии на цвет, отнимается количество монет пользователя, применяется цвет #}
+{% block title %}
+    Выбери цвет
+{% endblock %}
+{% block content %}
+    <h1>Выбери цвет</h1>
+    <table id="table">
+        <tr>
+            <th>Цвет</th>
+            <th>Цена</th>
+        </tr>
+        {% for color in colors %}
+            <tr>
+            <td>{{ color.color }}</td>
+            <td>{{ color.color_price }}</td>
+        {% endfor %}
+    </table>
+
+
+    <form action="{% url 'home' %}" method="POST">
+        {% csrf_token %}
+        {% for color in colors %}
+            <input type="button" name="choice" value="{{ color.id }}">
+            {#                <label for="choice{{ forloop.counter }}">{{ answer.answer_text }}</label>#}
+            <br>
+        {% endfor %}
+        {#            <input type="submit" value="Отправить">#}
+    </form>
+
+
+
+{% endblock %}

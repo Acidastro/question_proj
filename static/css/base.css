@@ -1,0 +1,167 @@
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    color: gray;
+}
+
+html {
+    /*background-image: url('../img/background.jpg');*/
+    background-size: cover;
+}
+
+
+h1, h2 {
+    color: black;
+    width: 50%;
+    margin: 25px auto 5px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px #3ca3c1;
+}
+
+li {
+    list-style-type: none;
+    color: white;
+}
+
+a {
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+}
+
+form {
+    margin: 1.5rem auto 5px;
+    width: 90%;
+    max-width: 40rem;
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: white;
+    box-shadow: 0 2px 8px #3ca3c1;
+}
+
+button {
+    cursor: pointer;
+    background-color: #bf0d55;
+    color: white;
+    border: 10px solid #bf0d55;
+}
+
+button:hover,
+button:active {
+    background-color: #320777;
+    border-color: #320777;
+}
+
+
+.logo {
+    border-color: #bf0d55;
+    background-color: white;
+}
+
+
+
+
+label {
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+}
+
+input {
+    /*width: 50%;*/
+    /*height: 28px;*/
+    padding: 4px 10px;
+    border: 1px solid #666;
+    background: #cce6ff;
+    font-size: 16px;
+}
+
+.list-group {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.list-group li {
+    list-style: none;
+    display: inline;
+}
+
+#navbar {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#navbar li {
+    display: inline;
+}
+
+#navbar {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    border: 2px solid #0066FF;
+    text-align: center;
+    background-color: #1d0d64;
+}
+
+#navbar a {
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    width: 130px;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+#navbar a:hover {
+    border-radius: 20px 5px;
+    background-color: #0066FF;
+}
+
+
+#table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#table td, #table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.own_login {
+    border: 1px solid #0066FF;
+    padding: 8px;
+}
+
+#table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#table tr:hover {
+    background-color: #ddd;
+}
+
+#table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #1d0d64;
+    color: white;
+}
+
+#header {
+    text-align: center;
+}
+
+.list:hover {
+    color: red;
+}

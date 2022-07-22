@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}
+    Пройти опрос
+{% endblock %}
+{% block content %}
+    <h1>Пройди опрос:</h1>
+    <ul class="list-group">
+        {% for question in all_questions %}
+            <h2>
+                <li><a class='list' href="{% url 'detail_question' question.id %}">
+                    {{ question.text|truncatewords:5 }}
+                    {% if not question.active %}
+                        <i>Не активно</i>
+                    {% endif %}
+                </a>
+                </li>
+            </h2>
+        {% endfor %}
+    </ul>
+{% endblock %}

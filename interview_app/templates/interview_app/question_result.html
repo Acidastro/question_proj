@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}
+    Успешное прохождение
+{% endblock %}
+{% block content %}
+    <h1>Вы успешно прошли опрос</h1>
+    <h2><a class='list' href="{% url 'list_questions' %}">Перейти к списку опросов</a></h2>
+    <h1>Вы получили 1 балл!</h1>
+{% endblock content %}
