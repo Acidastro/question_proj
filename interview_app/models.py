@@ -1,7 +1,26 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+
 User = settings.AUTH_USER_MODEL
+
+
+# Создать ответ. Привязать к вопросу
+class Answer(models.Model):
+    # question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='Вопрос')
+    answer_text = models.CharField(max_length=255, verbose_name='Текст ответа')
+
+    class Meta:
+        verbose_name = 'Ответы'
+        verbose_name_plural = 'Список ответов'
+
+    # Получить количество опросов
+    @property
+    def get_vote_count(self):
+        return self.vote_set.count()
+
+    def __str__(self):
+        return f"{self.answer_text[:25]}"
 
 
 # Создать вопрос
@@ -10,6 +29,7 @@ class Question(models.Model):
     text = models.TextField(verbose_name='Текст опроса')
     pub_date = models.DateTimeField(default=timezone.now, verbose_name='Дата публикации')
     active = models.BooleanField(default=True, verbose_name='Активно')
+    answer = models.ManyToManyField(Answer)
 
     class Meta:
         verbose_name = 'Тесты'
@@ -34,24 +54,6 @@ class Question(models.Model):
 
     def __str__(self):
         return self.text[:15]
-
-
-# Создать ответ. Привязать к вопросу
-class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name='Вопрос')
-    answer_text = models.CharField(max_length=255, verbose_name='Текст ответа')
-
-    class Meta:
-        verbose_name = 'Ответы'
-        verbose_name_plural = 'Список ответов'
-
-    # Получить количество опросов
-    @property
-    def get_vote_count(self):
-        return self.vote_set.count()
-
-    def __str__(self):
-        return f"{self.question.text[:25]} - {self.answer_text[:25]}"
 
 
 # Создать выбор. Связать с пользователем, с вопросом и его ответом.

@@ -7,7 +7,7 @@ urlpatterns = [
     path("signup/", views.register, name="signup"),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('user-list/', views.UserListView.as_view(), name='user-list'),
-    path('user-detail/', views.UserDetailView.as_view(), name='user-detail'),
+    path('user-detail/<int:user_id>/', views.user_detail, name='user-detail'),
     path('color-list/', views.detail_color, name='color-list'),
     path('color-vote/', views.got_color, name='color-vote'),
 

@@ -25,7 +25,7 @@ def detail_question(request, question_id: int):
 
     if not question.active:  # Если опрос пройден, показать результат
         return render(request, 'interview_app/question_result.html', {'question': question})
-    loop_count = question.answer_set.count()
+    loop_count = question.answer.count()
     context = {
         'question': question,
         'user_can_vote': user_can_vote,
