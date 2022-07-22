@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block title %}
+    Выбрать цвет
+{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -7,25 +10,20 @@
                 <h2 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h2>
             {% endfor %}
         {% endif %}
-
         <form action="{% url 'color-vote' %}" method="POST">
             {% csrf_token %}
-
-
             <table id="table">
                 <tr>
                     <th>Цвет</th>
                     <th>Цена</th>
                 </tr>
                 {% for color in colors %}
-
                     <tr>
-                        <td>
+                        <td style="background-color: {{ color.color }}">
                             <label for="choice{{ forloop.counter }}">
                                 <input type="radio" name="choice"
                                        id="choice{{ forloop.counter }}"
                                        value="{{ color.id }}">
-                                {{ color.color }}
                             </label>
                         </td>
                         <td>{{ color.color_price }}</td>
@@ -33,12 +31,9 @@
 
                     <br>
                 {% endfor %}
-
             </table>
             <input type="submit" value="КУПИТЬ">
-            <a class="list" href="{% url 'list_questions' %}" role="button">Отмена</a>
+            <a id="cancel" href="{% url 'home' %}" role="button">ОТМЕНА</a>
         </form>
-
     </div>
-
 {% endblock content %}

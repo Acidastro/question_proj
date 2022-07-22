@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView, ListView
 from .models import Question, Answer, Vote
+from base.models import MyUser
 from django.contrib import messages
 
 
@@ -9,9 +10,10 @@ from django.contrib import messages
 @login_required()  # проверка входа
 def list_questions(request):
     all_questions = Question.objects.all()
-    all_votes = Vote.objects.all()
+
     context = {
         'all_questions': all_questions,
+
     }
     return render(request, 'interview_app/list_questions.html', context)
 
@@ -19,12 +21,14 @@ def list_questions(request):
 # Страница опроса
 def detail_question(request, question_id: int):
     question = get_object_or_404(Question, id=question_id)
+    user_can_vote = question.user_can_vote(request.user)  # определит, проходился ли опрос ранее
 
     if not question.active:  # Если опрос пройден, показать результат
         return render(request, 'interview_app/question_result.html', {'question': question})
     loop_count = question.answer_set.count()
     context = {
         'question': question,
+        'user_can_vote': user_can_vote,
         'loop_time': range(0, loop_count),
     }
     return render(request, 'interview_app/question_detail.html', context)
@@ -44,7 +48,7 @@ def question_vote(request, question_id: int):
         return redirect("list_questions")
 
     if answer_id:  # Выбор сделан. Сохранить
-        user = request.user
+        user = MyUser.objects.get(login=request.user)  # определить кто юзер
         user.chain += 1  # добавить монету
         user.count_of_tests += 1  # добавить пройденный тест
         user.save()

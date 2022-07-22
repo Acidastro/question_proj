@@ -7,13 +7,12 @@
     <ul class="list-group">
         {% for question in all_questions %}
             <h2>
-                <li><a class='list' href="{% url 'detail_question' question.id %}">
-                    {{ question.text|truncatewords:5 }}
+                <a class='list' href="{% url 'detail_question' question.id %}">
+                    {{ question.text }}
                     {% if not question.active %}
                         <i>Не активно</i>
                     {% endif %}
                 </a>
-                </li>
             </h2>
         {% endfor %}
     </ul>

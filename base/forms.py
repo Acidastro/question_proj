@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from .models import UserColor
 
 
+# Форма создания пользователя
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
@@ -17,7 +18,7 @@ class UserCreationForm(forms.ModelForm):
         }
 
     def clean_password2(self):
-        # Check that the two password entries match
+        # Проверка совпадения паролей
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
@@ -43,6 +44,3 @@ class ColorBuyForm(forms.ModelForm):
             'color',
             'color_price',
         ]
-        # widgets = {
-        #     'text': forms.Textarea(attrs={'rows': 5, 'cols': 20}),
-        # }

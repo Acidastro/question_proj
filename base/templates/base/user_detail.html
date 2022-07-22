@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ user.login }}
+{% endblock %}
+
+{% block content %}
+    <h2>Страница пользователя {{ user.login }}</h2>
+    <h2>Количество пройденных опросов: {{ user.count_of_tests }}</h2>
+    <h2>Количество баллов: {{ user.chain }}</h2>
+    <h2>Цвет: {% if not user.user_color %}
+        Белый {% else %}{{ user.user_color.color_rus_name }}
+    {% endif %} </h2>
+{% endblock content %}

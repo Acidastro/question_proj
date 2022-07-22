@@ -2,9 +2,11 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
+# Цвет
 class UserColor(models.Model):
     # green, black, white, red, blue,yellow, pink, cyan
     color = models.CharField(max_length=40, unique=True)
+    color_rus_name = models.CharField(max_length=50, null=True)
     color_price = models.IntegerField(null=True, default=0)
 
     @staticmethod
@@ -15,7 +17,12 @@ class UserColor(models.Model):
     def __str__(self):
         return self.color
 
+    class Meta:
+        verbose_name = 'цвет'
+        verbose_name_plural = 'Список цветов'
 
+
+# Кастомный UserManager
 class MyUserManager(BaseUserManager):
     def create_user(self, login, password=None):
         if not login:
@@ -39,6 +46,7 @@ class MyUserManager(BaseUserManager):
         return user
 
 
+# Кастомный User
 class MyUser(AbstractBaseUser):
     login = models.CharField(
         verbose_name='Логин',
@@ -59,6 +67,10 @@ class MyUser(AbstractBaseUser):
     def __str__(self):
         return self.login
 
+    @property
+    def is_staff(self):
+        return self.is_admin
+
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
         # Simplest possible answer: Yes, always
@@ -69,13 +81,11 @@ class MyUser(AbstractBaseUser):
         # Simplest possible answer: Yes, always
         return True
 
-    @property
-    def is_staff(self):
-        "Is the user a member of staff?"
-        # Simplest possible answer: All admins are staff
-        return self.is_admin
-
     # def save(self, *args, **kwargs):
     #     if self.user_color is None:
     #         self.user_color = UserColor.get_default_user_settings()
     #     super(MyUser, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = 'Пользователя'
+        verbose_name_plural = 'Список пользователей'
