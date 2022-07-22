@@ -23,7 +23,7 @@
                 </tr>
             {% else %} {# Остальные юзеры #}
                 <tr>
-                    <td><a style="color: black" href="{% url 'user-detail' %}">{{ member.login }}</a></td>
+                    <td><a style="color: black" href="{% url 'user-detail' member.id %}">{{ member.login }}</a></td>
                     <td>{{ member.count_of_tests }}</td>
                     <td>{{ member.chain }}</td>
                     {% if member.user_color %}

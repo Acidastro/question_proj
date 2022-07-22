@@ -4,10 +4,10 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Страница пользователя {{ user.login }}</h2>
-    <h2>Количество пройденных опросов: {{ user.count_of_tests }}</h2>
-    <h2>Количество баллов: {{ user.chain }}</h2>
-    <h2>Цвет: {% if not user.user_color %}
-        Белый {% else %}{{ user.user_color.color_rus_name }}
+    <h2>Страница пользователя {{ member.login }}</h2>
+    <h2>Количество пройденных опросов: {{ member.count_of_tests }}</h2>
+    <h2>Количество баллов: {{ member.chain }}</h2>
+    <h2>Цвет: {% if not member.user_color %}
+        Белый {% else %}{{ member.user_color.color_rus_name|default:member.user_color }}
     {% endif %} </h2>
 {% endblock content %}

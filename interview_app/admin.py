@@ -4,17 +4,17 @@ from .models import Question, Answer, Vote
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ["text", "owner", "pub_date", "active"]
-    search_fields = ["text", "owner__username"]
+    list_display = ["text", "pub_date", "active"]
+    search_fields = ["text"]
     list_filter = ["active"]
+    filter_horizontal = ['answer']
     date_hierarchy = "pub_date"
 
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ["answer_text", "question"]
-    search_fields = ["answer_text", "question__text"]
-    autocomplete_fields = ["question"]
+    list_display = ["answer_text", ]
+    search_fields = ["answer_text", ]
 
 
 # @admin.register(Vote)

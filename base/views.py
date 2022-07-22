@@ -44,8 +44,15 @@ class UserListView(ListView):
         return filter_qs
 
 
-class UserDetailView(TemplateView):
-    template_name = 'base/user_detail.html'
+def user_detail(request, user_id):
+    member = MyUser.objects.get(id=user_id)
+    return render(request, 'base/user_detail.html', {
+        'member': member,
+    })
+
+
+# class UserDetailView(TemplateView):
+#     template_name = 'base/user_detail.html'
 
 
 class ColorListView(ListView):
