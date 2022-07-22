@@ -17,8 +17,8 @@ class AnswerAdmin(admin.ModelAdmin):
     autocomplete_fields = ["question"]
 
 
-@admin.register(Vote)
-class VoteAdmin(admin.ModelAdmin):
-    list_display = ["answer", "question", "user"]
-    search_fields = ["answer__answer_text", "question__text", "user__username"]
-    # autocomplete_fields = ["answer", "question", "user"]
+# @admin.register(Vote)
+# class VoteAdmin(admin.ModelAdmin):
+#     list_display = ["answer", "question", "user"]
+#     search_fields = ["answer__answer_text", "question__text", "user__username"]
+#     # autocomplete_fields = ["answer", "question", "user"]

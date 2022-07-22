@@ -3,9 +3,7 @@
 {% block content %}
     <h1>Вход</h1>
     {% if form.errors %}
-        <p>
-            Данные для входа не верны.
-        </p>
+        <p>Данные для входа не верны</p>
     {% else %}
         <h2>Используйте форму для входа:</h2>
     {% endif %}
@@ -15,7 +13,6 @@
             <table>
                 {{ form.as_p }}
                 <tr>
-                    <td>&nbsp;</td>
                     <td><input type="submit" value="Войти"></td>
                 </tr>
             </table>

@@ -11,13 +11,31 @@
             <th>Пользователь</th>
             <th>Количество пройденных тестов</th>
             <th>Количество баллов на счету</th>
+            <th>Цвет</th>
         </tr>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.login }}</td>
-                <td>{{ user.count_of_tests }}</td>
-                <td>{{ user.chain }}</td>
-            </tr>
+        {% for member in members %}
+            {% if member == request.user %} {# Выделить юзера #}
+                <tr style="background-color: rgba(174,0,5,0.43);">
+                    <td><a style="color: black" href="{% url 'home' %}">{{ member.login }} </a></td>
+                    <td>{{ member.count_of_tests }}</td>
+                    <td>{{ member.chain }}</td>
+                    <td id="change-color"></td>
+                </tr>
+            {% else %} {# Остальные юзеры #}
+                <tr>
+                    <td><a style="color: black" href="{% url 'user-detail' %}">{{ member.login }}</a></td>
+                    <td>{{ member.count_of_tests }}</td>
+                    <td>{{ member.chain }}</td>
+                    {% if member.user_color %}
+                        <td style="background-color:{{ member.user_color }}"></td>
+                    {% else %}
+                        <td style="background-color:white"></td>
+
+                    {% endif %}
+
+                </tr>
+            {% endif %}
+
         {% endfor %}
 
 

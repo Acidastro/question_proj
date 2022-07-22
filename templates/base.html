@@ -6,12 +6,12 @@
 
     <style>
         {% if user.user_color_id is None or user.user_color_id is 1 %}
-            #header {
+            #change-color {
                 color: black;
                 background-color: white;
             }
         {% else %}
-            #header {
+            #change-color {
                 color: white;
                 background-color: {{ user.user_color }};
             }
@@ -24,8 +24,8 @@
 </head>
 <body>
 
-<div id="header">
-    <span id="header" class="text">Зарабатывайте баллы за прохождение опросов, меняйте цвет фона у этой надписи в личном кабинете</span><br>
+<div id="change-color">
+    <span id="change-color" class="text">Зарабатывайте баллы за прохождение опросов, меняйте цвет фона у этой надписи в личном кабинете</span><br>
     <ul id="navbar">
         {% if user.is_authenticated %}
             <li {% if section == "home" %}class="selected"{% endif %}>

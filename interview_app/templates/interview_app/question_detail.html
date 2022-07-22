@@ -1,27 +1,26 @@
 {% extends 'base.html' %}
-
-
+{% block title %}
+    {{ question.text|truncatewords:5 }}
+{% endblock %}
 {% block content %}
     <div class="container">
         <h1>{{ question.text }}</h1>
-
-        {% if messages %}
-            {% for message in messages %}
-                <h2 {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h2>
-            {% endfor %}
+        {# Если опрос был пройден ранее, вывести текст #}
+        {% if not user_can_vote %}
+            <h1>Вы уже проходили этот опрос</h1>
+            <h1><a class="list" href="{% url 'list_questions' %}">Вернуться</a></h1>
+        {% else %}
+            <form action="{% url 'vote' question.id %}" method="POST">
+                {% csrf_token %}
+                {% for answer in question.answer_set.all %}
+                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ answer.id }}">
+                    <label for="choice{{ forloop.counter }}">{{ answer.answer_text }}</label>
+                    <br>
+                {% endfor %}
+                <input type="submit" value="Отправить">
+                <a id="cancel" href="{% url 'list_questions' %}" role="button">Отмена</a>
+            </form>
         {% endif %}
 
-        <form action="{% url 'vote' question.id %}" method="POST">
-            {% csrf_token %}
-            {% for answer in question.answer_set.all %}
-                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ answer.id }}">
-                <label for="choice{{ forloop.counter }}">{{ answer.answer_text }}</label>
-                <br>
-            {% endfor %}
-            <input type="submit" value="Отправить">
-            <a href="{% url 'list_questions' %}" role="button">Отмена</a>
-        </form>
-
     </div>
-
 {% endblock content %}

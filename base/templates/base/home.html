@@ -4,18 +4,16 @@
 
 {% block content %}
     <h1>Привет, {{ user.login|default:'Гость' }}</h1>
-    <div>
-        {% if user.is_authenticated %}
-            <h2>Количество баллов: {{ user.chain }}
-            <h2><a class='list' href="{% url 'list_questions' %}">Открыть список опросов</a></h2>
-            <h2><a class='list' href="{% url 'user-list' %}">Открыть рейтинг пользователей</a></h2>
-            <h2><a class='list' href="{% url 'color-list' %}">Купить новый цвет</a></h2>
+    {% if user.is_authenticated %}
+        <h2>Количество баллов: {{ user.chain }}</h2>
+        <h2><a class='list' href="{% url 'list_questions' %}">Открыть список опросов</a></h2>
+        <h2><a class='list' href="{% url 'user-list' %}">Открыть рейтинг пользователей</a></h2>
+        <h2><a class='list' href="{% url 'color-list' %}">Купить новый цвет</a></h2>
 
 
 
-        {% else %}
-            <h2><a href="{% url 'signup' %}">Зарегистрироваться</a></h2>
-            <h2><a href="{% url 'login' %}">Войти</a></h2>
-        {% endif %}
-    </div>
+    {% else %}
+        <h2><a class='list' href="{% url 'signup' %}">Зарегистрироваться</a></h2>
+        <h2><a class='list' href="{% url 'login' %}">Войти</a></h2>
+    {% endif %}
 {% endblock %}
